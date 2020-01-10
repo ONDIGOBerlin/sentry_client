@@ -10,9 +10,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Client extends \Raven_Client
 {
 
-    public function __construct()
+    /**
+     * Client constructor.
+     * @param array $additionalOptions
+     */
+    public function __construct($additionalOptions = [])
     {
-        parent::__construct(ConfigurationService::getDsn());
+        parent::__construct(ConfigurationService::getDsn(), $additionalOptions);
     }
 
     /**

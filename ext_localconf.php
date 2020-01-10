@@ -21,7 +21,13 @@ if (!function_exists('register_client')) {
             return;
         }
 
-        $GLOBALS['USER']['sentryClient'] = new \Networkteam\SentryClient\Client();
+        $release = isset($GLOBALS['sentryRelease']) ? $GLOBALS['sentryRelease']: null;
+        $additionalOptions = array();
+        if ($release) {
+            $additionalOptions['release'] = $release;
+        }
+
+        $GLOBALS['USER']['sentryClient'] = new \Networkteam\SentryClient\Client($additionalOptions);
         $errorHandler = new Raven_ErrorHandler($GLOBALS['USER']['sentryClient'], true);
         $errorHandler->registerExceptionHandler();
         $errorHandler->registerShutdownFunction();
