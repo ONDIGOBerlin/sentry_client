@@ -22,9 +22,13 @@ if (!function_exists('register_client')) {
         }
 
         $release = isset($GLOBALS['sentryRelease']) ? $GLOBALS['sentryRelease']: null;
+        $environment = isset($GLOBALS['sentryEnvironment']) ? $GLOBALS['sentryEnvironment']: null;
         $additionalOptions = array();
         if ($release) {
             $additionalOptions['release'] = $release;
+        }
+        if ($environment) {
+            $additionalOptions['environment'] = $environment;
         }
 
         $GLOBALS['USER']['sentryClient'] = new \Networkteam\SentryClient\Client($additionalOptions);
